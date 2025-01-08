@@ -2,8 +2,8 @@ module Section.One.Data.Person.PhoneNumber.LineNumber where
 
 import Prelude
 
-import Data.Array (intercalate)
 import Data.Either (Either)
+import Data.Foldable (fold)
 import Effect.Exception.Unsafe (unsafeThrow)
 import Section.One.Data.Digit (Digit)
 import Section.One.Data.Digit as Digit
@@ -14,7 +14,7 @@ areaCode :: String -> Either String LineNumber
 areaCode _ = unsafeThrow "Unimplemeted"
 
 areaCodeValue :: LineNumber -> String
-areaCodeValue (LineNumber a b c d) = intercalate "" (Digit.toString <$> [a, b, c, d])
+areaCodeValue (LineNumber a b c d) = fold (Digit.toString <$> [ a, b, c, d ])
 
 firstDigit :: LineNumber -> Digit
 firstDigit (LineNumber a _ _ _) = a

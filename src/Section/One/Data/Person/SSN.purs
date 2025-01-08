@@ -4,8 +4,7 @@ module Section.One.Data.Person.SSN
   , group
   , serial
   , ssn
-  )
-  where
+  ) where
 
 import Data.Either (Either)
 import Effect.Exception.Unsafe (unsafeThrow)

@@ -6,13 +6,12 @@ module Section.One.Data.Person.SSN.SerialNumber
   , serial
   , serialValue
   , thirdDigit
-  )
-  where
+  ) where
 
 import Prelude
 
-import Data.Array (intercalate)
 import Data.Either (Either)
+import Data.Foldable (fold)
 import Effect.Exception.Unsafe (unsafeThrow)
 import Section.One.Data.Digit (Digit)
 import Section.One.Data.Digit as Digit
@@ -23,7 +22,7 @@ serial :: String -> Either String Serial
 serial _ = unsafeThrow "Unimplemented"
 
 serialValue :: Serial -> String
-serialValue (Serial a b c d) = intercalate "" (Digit.toString <$> [a,b,c,d])
+serialValue (Serial a b c d) = fold (Digit.toString <$> [ a, b, c, d ])
 
 firstDigit :: Serial -> Digit
 firstDigit (Serial a _ _ _) = a

@@ -5,13 +5,12 @@ module Section.One.Data.Person.SSN.Area
   , firstDigit
   , secondDigit
   , thirdDigit
-  )
-  where
+  ) where
 
 import Prelude
 
-import Data.Array (intercalate)
 import Data.Either (Either)
+import Data.Foldable (fold)
 import Effect.Exception.Unsafe (unsafeThrow)
 import Section.One.Data.Digit (Digit)
 import Section.One.Data.Digit as Digit
@@ -24,7 +23,7 @@ area :: String -> Either String Area
 area _ = unsafeThrow "Unimplemented"
 
 areaValue :: Area -> String
-areaValue (Area a b c) = intercalate "" (Digit.toString <$> [ a, b, c ])
+areaValue (Area a b c) = fold (Digit.toString <$> [ a, b, c ])
 
 firstDigit :: Area -> Digit
 firstDigit (Area a _ _) = a

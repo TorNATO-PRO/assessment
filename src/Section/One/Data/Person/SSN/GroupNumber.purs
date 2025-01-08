@@ -4,13 +4,12 @@ module Section.One.Data.Person.SSN.GroupNumber
   , group
   , groupValue
   , secondDigit
-  )
-  where
+  ) where
 
 import Prelude
 
-import Data.Array (intercalate)
 import Data.Either (Either)
+import Data.Foldable (fold)
 import Effect.Exception.Unsafe (unsafeThrow)
 import Section.One.Data.Digit (Digit)
 import Section.One.Data.Digit as Digit
@@ -21,7 +20,7 @@ group :: String -> Either String Group
 group _ = unsafeThrow "Unimplemented"
 
 groupValue :: Group -> String
-groupValue (Group a b) = intercalate "" (Digit.toString <$> [ a, b ])
+groupValue (Group a b) = fold (Digit.toString <$> [ a, b ])
 
 firstDigit :: Group -> Digit
 firstDigit (Group a _) = a

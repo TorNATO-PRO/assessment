@@ -6,9 +6,7 @@ module Section.One.Data.Person
   , person
   , phoneNumber
   , ssn
-  )
-  where
-
+  ) where
 
 import Data.List as List
 import Data.String.NonEmpty.Internal (NonEmptyString)
@@ -21,12 +19,12 @@ import Section.One.Data.Person.SSN (SSN)
 -- The requirements do not specify anything special for
 -- the names (outside of the obvious - that it can't be empty).
 newtype Person = Person
-    { firstName :: NonEmptyString
-    , lastName :: NonEmptyString
-    , ssn :: SSN
-    , maritalStatus :: Boolean
-    , phoneNumber :: USPhoneNumber
-    }
+  { firstName :: NonEmptyString
+  , lastName :: NonEmptyString
+  , ssn :: SSN
+  , maritalStatus :: Boolean
+  , phoneNumber :: USPhoneNumber
+  }
 
 person :: EphemeralPerson -> V (List.List String) Person
 person _ = unsafeThrow "Unimplemented"

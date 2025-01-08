@@ -12,15 +12,25 @@ to generate this file without the comments in this block.
 -}
 { name = "my-project"
 , dependencies =
-  [ "arrays"
+  [ "affjax"
+  , "affjax-web"
+  , "argonaut"
+  , "argonaut-codecs"
+  , "arrays"
   , "console"
   , "effect"
   , "either"
   , "exceptions"
+  , "foldable-traversable"
+  , "foreign-object"
+  , "halogen"
+  , "halogen-hooks"
   , "lists"
   , "maybe"
+  , "ordered-collections"
   , "prelude"
   , "strings"
+  , "tuples"
   , "validation"
   ]
 , packages = ./packages.dhall
