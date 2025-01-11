@@ -9,8 +9,11 @@ import Halogen.VDom.Driver (runUI)
 import Section.Two.DiggityDog.App as App
 import Section.Two.DiggityDog.AppM (runAppM)
 
+pageSize :: Int
+pageSize = 20
+
 main :: Effect Unit
 main = HA.runHalogenAff do
   body <- HA.awaitBody
-  let app = H.hoist runAppM App.component
+  let app = H.hoist (runAppM pageSize) App.component
   runUI app unit body

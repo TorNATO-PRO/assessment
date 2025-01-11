@@ -6,6 +6,7 @@ module Section.Two.DiggityDog.AppM
 
 import Prelude
 
+import Control.Monad.Reader (class MonadAsk, ReaderT, runReaderT)
 import Effect.Aff (Aff)
 import Effect.Aff.Class (class MonadAff, liftAff)
 import Effect.Class (class MonadEffect)
@@ -15,7 +16,7 @@ import Section.Two.DiggityDog.Capability.GetBreedDetails (class GetBreedDetails)
 import Section.Two.DiggityDog.Capability.GetBreeds (class GetBreeds)
 import Section.Two.DiggityDog.Capability.LogMessage (class LogMessage)
 
-newtype AppM a = AppM (Aff a)
+newtype AppM a = AppM (ReaderT Int Aff a)
 
 derive newtype instance Functor AppM
 
@@ -31,8 +32,10 @@ derive newtype instance MonadEffect AppM
 
 derive newtype instance MonadAff AppM
 
-runAppM :: AppM ~> Aff
-runAppM (AppM m)= m
+derive newtype instance MonadAsk Int AppM
+
+runAppM :: Int -> AppM ~> Aff
+runAppM pageSize (AppM m) = runReaderT m pageSize
 
 instance LogMessage AppM where
   logMessage msg = Console.log msg

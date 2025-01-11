@@ -16,7 +16,6 @@ to generate this file without the comments in this block.
   , "affjax"
   , "affjax-web"
   , "argonaut"
-  , "argonaut-codecs"
   , "arrays"
   , "bifunctors"
   , "console"

@@ -5,8 +5,10 @@ module Section.Two.DiggityDog.Components.PagedImageViewer
 
 import Prelude
 
+import Control.Monad.Reader (class MonadAsk, ask)
 import Data.Array (slice)
 import Data.Array as Array
+import Data.Maybe (Maybe(..))
 import Data.String.NonEmpty as NES
 import Data.Tuple (Tuple(..))
 import Halogen (ClassName(..))
@@ -18,9 +20,6 @@ import Halogen.Hooks as Hooks
 import Section.Two.DiggityDog.Components.NavButton as NavButton
 import Section.Two.DiggityDog.Data.BreedImages (BreedImages, breedImages)
 import Type.Proxy (Proxy(..))
-
-pageSize :: Int
-pageSize = 20
 
 type Props =
   { images :: BreedImages
@@ -36,9 +35,15 @@ _backButton = Proxy
 _nextButton :: Proxy "nextButton"
 _nextButton = Proxy
 
-component :: forall q m a. H.Component q Props a m
+component :: forall q m a. MonadAsk Int m => H.Component q Props a m
 component = Hooks.component \_ { images } -> Hooks.do
   Tuple currentPage currentPageId <- Hooks.useState 0
+  Tuple pageSize pageSizeId <- Hooks.useState 0
+
+  Hooks.useLifecycleEffect do
+    ps <- ask
+    Hooks.put pageSizeId ps
+    pure Nothing
 
   let
     handleBackClicked :: BackButtonAction -> HookM m Unit
@@ -62,7 +67,7 @@ component = Hooks.component \_ { images } -> Hooks.do
       [ HH.p_ [ HH.text $ "Displaying " <> show startIndex <> "-" <> show endIndex <> " of " <> show numImages ]
       , HH.div
           [ HP.class_ $ ClassName "image-container" ]
-          ((page currentPage $ breedImages images) <#> \image -> HH.img [ HP.src $ NES.toString image, HP.class_ $ ClassName "image" ])
+          ((page pageSize currentPage $ breedImages images) <#> \image -> HH.img [ HP.src $ NES.toString image, HP.class_ $ ClassName "image" ])
       , HH.div
           [ HP.class_ $ ClassName "image-nav-container"
 
@@ -72,4 +77,4 @@ component = Hooks.component \_ { images } -> Hooks.do
           ]
       ]
   where
-  page idx = slice (idx * pageSize) ((idx + 1) * pageSize)
+  page pageSize idx = slice (idx * pageSize) ((idx + 1) * pageSize)

@@ -4,6 +4,7 @@ module Section.Two.DiggityDog.App
 
 import Prelude
 
+import Control.Monad.Reader (class MonadAsk)
 import Data.Array as Array
 import Data.Either (Either(..))
 import Data.Foldable (for_)
@@ -41,6 +42,7 @@ component
    . LogMessage m
   => GetBreeds m
   => GetBreedDetails m
+  => MonadAsk Int m
   => H.Component q i o m
 component = Hooks.component \_ _ -> Hooks.do
   Tuple model modelId <- Hooks.useState Nothing
