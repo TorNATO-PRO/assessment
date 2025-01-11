@@ -4,7 +4,7 @@ Panoramic Coding Assessment
 To run, follow these steps:
 
 ```
-$ git@github.com:TorNATO-PRO/assessment.git
+$ git clone git@github.com:TorNATO-PRO/assessment.git
 $ cd assessment
 $ yarn install
 $ yarn serve
