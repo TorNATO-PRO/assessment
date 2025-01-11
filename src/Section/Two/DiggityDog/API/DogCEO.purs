@@ -1,4 +1,8 @@
-module Section.Two.DiggityDog.API.DogCEO where
+module Section.Two.DiggityDog.API.DogCEO
+  ( getBreedDetails
+  , getBreeds
+  )
+  where
 
 import Prelude
 
@@ -22,5 +26,5 @@ getBreeds = do
 
 getBreedDetails :: NonEmptyString -> Aff (Either String BreedImages)
 getBreedDetails breed = do
-  detailsE <- get json (fold ["http://dog.ceo/api/breed/", NES.toString breed, "/images"])
+  detailsE <- get json (fold [ "http://dog.ceo/api/breed/", NES.toString breed, "/images" ])
   pure $ lmap printError detailsE >>= \resp -> lmap printJsonDecodeError (decodeJson resp.body)

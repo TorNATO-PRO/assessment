@@ -12,11 +12,13 @@ to generate this file without the comments in this block.
 -}
 { name = "my-project"
 , dependencies =
-  [ "affjax"
+  [ "aff"
+  , "affjax"
   , "affjax-web"
   , "argonaut"
   , "argonaut-codecs"
   , "arrays"
+  , "bifunctors"
   , "console"
   , "effect"
   , "either"
@@ -27,9 +29,11 @@ to generate this file without the comments in this block.
   , "halogen-hooks"
   , "lists"
   , "maybe"
+  , "newtype"
   , "ordered-collections"
   , "prelude"
   , "strings"
+  , "transformers"
   , "tuples"
   , "validation"
   ]
