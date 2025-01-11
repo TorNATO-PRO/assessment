@@ -4,24 +4,23 @@ module Section.One.Data.Digit
   , fromString
   , toInt
   , toString
-  )
-  where
+  ) where
 
 import Prelude
 
 import Data.Maybe (Maybe(..))
 
 data Digit
-    = Zero
-    | One
-    | Two
-    | Three
-    | Four
-    | Five
-    | Six
-    | Seven
-    | Eight
-    | Nine
+  = Zero
+  | One
+  | Two
+  | Three
+  | Four
+  | Five
+  | Six
+  | Seven
+  | Eight
+  | Nine
 
 derive instance Eq Digit
 
@@ -41,16 +40,16 @@ instance Bounded Digit where
 
 toInt :: Digit -> Int
 toInt = case _ of
-    Zero -> 0
-    One -> 1
-    Two -> 2
-    Three -> 3
-    Four -> 4
-    Five -> 5
-    Six -> 6
-    Seven -> 7
-    Eight -> 8
-    Nine -> 9
+  Zero -> 0
+  One -> 1
+  Two -> 2
+  Three -> 3
+  Four -> 4
+  Five -> 5
+  Six -> 6
+  Seven -> 7
+  Eight -> 8
+  Nine -> 9
 
 fromInt :: Int -> Maybe Digit
 fromInt = case _ of
@@ -66,7 +65,6 @@ fromInt = case _ of
   9 -> Just Nine
   _ -> Nothing
 
-
 -- lets honor the lawful Show
 -- The Show type class represents those types which can be converted into a human-readable String representation.
 
@@ -75,27 +73,27 @@ fromInt = case _ of
 
 toString :: Digit -> String
 toString = case _ of
-    Zero -> "0"
-    One -> "1"
-    Two -> "2"
-    Three -> "3"
-    Four -> "4"
-    Five -> "5"
-    Six -> "6"
-    Seven -> "7"
-    Eight -> "8"
-    Nine -> "9"
+  Zero -> "0"
+  One -> "1"
+  Two -> "2"
+  Three -> "3"
+  Four -> "4"
+  Five -> "5"
+  Six -> "6"
+  Seven -> "7"
+  Eight -> "8"
+  Nine -> "9"
 
 fromString :: String -> Maybe Digit
 fromString str = case str of
-    "0" -> Just Zero
-    "1" -> Just One
-    "2" -> Just Two
-    "3" -> Just Three
-    "4" -> Just Four
-    "5" -> Just Five
-    "6" -> Just Six
-    "7" -> Just Seven
-    "8" -> Just Eight
-    "9" -> Just Nine
-    _ -> Nothing
+  "0" -> Just Zero
+  "1" -> Just One
+  "2" -> Just Two
+  "3" -> Just Three
+  "4" -> Just Four
+  "5" -> Just Five
+  "6" -> Just Six
+  "7" -> Just Seven
+  "8" -> Just Eight
+  "9" -> Just Nine
+  _ -> Nothing
