@@ -110,6 +110,6 @@ component = Hooks.component \_ _ -> Hooks.do
                   ]
               --    HH.p_ [ HH.text "Successfully loaded images" ]
               Just (Left err) -> HH.p_ [ HH.text $ "Failed to load images: " <> err ]
-              Nothing -> HH.p_ [ HH.text "Loading " ]
+              Nothing -> HH.p_ [ HH.text "Loading..." ]
       Nothing -> HH.p_ [ HH.text "Loading..." ]
 
